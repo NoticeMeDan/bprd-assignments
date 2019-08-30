@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="BPRD-01-EJOE-MIPS-MHEL.fs" />
+        <Compile Include="Intro2.fs" />
     </ItemGroup>
 
 </Project>
