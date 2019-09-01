@@ -130,7 +130,7 @@ let rec subst (e : expr) (env : (string * expr) list) : expr =
     match e with
     | CstI i -> e
     | Var x  -> lookOrSelf env x
-    | Let(x, erhs, ebody) ->
+    | Let(x * erhs, ebody) ->
       let newx = newVar x
       let newenv = (x, Var newx) :: remove env x
       Let(newx, subst erhs env, subst ebody newenv)
@@ -182,8 +182,10 @@ let rec freevars e : string list =
     match e with
     | CstI i -> []
     | Var x  -> [x]
-    | Let(x, erhs, ebody) -> 
-          union (freevars erhs, minus (freevars ebody, [x]))
+    | Let(x, ebody) -> 
+      match x with
+      |[] -> freevars ebody
+      |(x1,x2)::xr -> union (freevars x2, minus (freevars (Let(xr,ebody)), [x1]))
     | Prim(ope, e1, e2) -> union (freevars e1, freevars e2);;
 
 (* Alternative definition of closed *)
@@ -216,11 +218,13 @@ let rec tcomp (e : expr) (cenv : string list) : texpr =
     match e with
     | CstI i -> TCstI i
     | Var x  -> TVar (getindex cenv x)
-    | Let(x, erhs, ebody) -> 
-      let cenv1 = x :: cenv 
-      TLet(tcomp erhs cenv, tcomp ebody cenv1)
+    | Let(x, ebody) ->
+      match x with
+      |[] -> tcomp ebody cenv
+      |(x1,x2)::xr -> let cenv' = x1 :: cenv
+                      TLet(tcomp x2 cenv', tcomp ebody cenv')
     | Prim(ope, e1, e2) -> TPrim(ope, tcomp e1 cenv, tcomp e2 cenv);;
-
+    
 (* Evaluation of target expressions with variable indexes.  The
    run-time environment renv is a list of variable values (ints).  *)
 
