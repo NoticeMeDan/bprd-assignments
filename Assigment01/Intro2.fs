@@ -70,8 +70,12 @@ let rec fmt (exp: aexpr) : string =
     | Mul(e1, e2) -> sprintf "(%s * %s)" (fmt e1) (fmt e2)
     | Sub(e1, e2) -> sprintf "(%s - %s)" (fmt e1) (fmt e2)
 
-let test = fmt (Sub(Var "x", CstI 34))
+//tests
+let fmtTest1 = fmt (Sub(Var "x", CstI 34))  = "(x - 34)"
+let fmtTest2 = fmt (CstI 1)                 = "1"
+let fmtTest3 = fmt (Var "x")                = "x"
 
+// (iv)
 let isSimplifiable exp =
     match exp with
         | Add(CstI 0, e)
@@ -83,7 +87,6 @@ let isSimplifiable exp =
         | Mul(e, CstI 0) -> true
         | _ -> false
 
-// (iv)
 let rec simplify (exp : aexpr) : aexpr =
     match exp with
     | CstI i -> CstI i
@@ -110,3 +113,39 @@ let rec simplify (exp : aexpr) : aexpr =
 let test = Add(Mul(CstI 0, CstI 5), Sub(CstI 5, CstI 0))
 
 // (v)
+let rec symbolicDifferentiation x : aexpr =
+   let derivative' =
+       match x with
+       | Var v       -> CstI 1
+       | CstI i      -> CstI 0
+       | Add(e1, e2) -> Add(Derivative(e1), Derivative(e2))
+       | Sub(e1, e2) -> Sub(Derivative(e1), Derivative(e2))
+       | Mul(e1, e2) -> Add(Mul(Derivative(e1), e2), Mul(e1, Derivative(e2)))
+       | _ -> CstI 0
+   simplify derivative'
+
+//tests with e1, e2, e3
+let diffTest_1 = symbolicDifferentiation e1
+let diffTest_2 = symbolicDifferentiation e2
+let diffTest_3 = symbolicDifferentiation e3
+
+//5x + 0 -> 5
+let diffTest_4 = symbolicDifferentiation (Add(Mul(CstI 5, Var "x"), CstI 0))
+
+//2x + 7 -> 2
+let diffTest_5 = symbolicDifferentiation (Add(Mul(CstI 2, Var "x"), CstI 3))
+
+//x -> 1
+let diffTest_6 = symbolicDifferentiation (Var "x")
+
+//x8 -> 8
+let diffTest_7 = symbolicDifferentiation (Mul(CstI 8, Var "x"))
+
+//10x + 13 * 23y -> 10x + 299y
+let diffTest_8 = symbolicDifferentiation (Add(
+                                              (Mul(
+                                                  CstI 10, 
+                                                  Var "x"
+                                              )),
+                                              (Mul ((Mul(CstI 13, CstI 23)), Var "y"))
+                                          ))
