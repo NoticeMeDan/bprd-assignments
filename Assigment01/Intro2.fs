@@ -66,9 +66,11 @@ let rec fmt (exp: aexpr) : string =
     match exp with
     | CstI i -> string i
     | Var x -> x
-    | Add(e1, e2) -> sprintf "%s + %s" (fmt e1) (fmt e2)
-    | Mul(e1, e2) -> sprintf "%s * %s" (fmt e1) (fmt e2)
-    | Sub(e1, e2) -> sprintf "%s - %s" (fmt e1) (fmt e2)
+    | Add(e1, e2) -> sprintf "(%s + %s)" (fmt e1) (fmt e2)
+    | Mul(e1, e2) -> sprintf "(%s * %s)" (fmt e1) (fmt e2)
+    | Sub(e1, e2) -> sprintf "(%s - %s)" (fmt e1) (fmt e2)
+
+let test = fmt (Sub(Var "x", CstI 34))
 
 let isSimplifiable exp =
     match exp with
