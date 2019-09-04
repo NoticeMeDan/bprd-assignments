@@ -113,14 +113,14 @@ let rec simplify (exp : aexpr) : aexpr =
 let test = Add(Mul(CstI 0, CstI 5), Sub(CstI 5, CstI 0))
 
 // (v)
-let rec symbolicDifferentiation x : aexpr =
+let rec symbolicDifferentiation exp : aexpr =
    let derivative' =
-       match x with
-       | Var v       -> CstI 1
+       match exp with
+       | Var x       -> CstI 1
        | CstI i      -> CstI 0
-       | Add(e1, e2) -> Add(Derivative(e1), Derivative(e2))
-       | Sub(e1, e2) -> Sub(Derivative(e1), Derivative(e2))
-       | Mul(e1, e2) -> Add(Mul(Derivative(e1), e2), Mul(e1, Derivative(e2)))
+       | Add(e1, e2) -> Add(symbolicDifferentiation(e1), symbolicDifferentiation(e2))
+       | Sub(e1, e2) -> Sub(symbolicDifferentiation(e1), symbolicDifferentiation(e2))
+       | Mul(e1, e2) -> Add(Mul(symbolicDifferentiation(e1), e2), Mul(e1, symbolicDifferentiation(e2)))
        | _ -> CstI 0
    simplify derivative'
 
@@ -140,12 +140,3 @@ let diffTest_6 = symbolicDifferentiation (Var "x")
 
 //x8 -> 8
 let diffTest_7 = symbolicDifferentiation (Mul(CstI 8, Var "x"))
-
-//10x + 13 * 23y -> 10x + 299y
-let diffTest_8 = symbolicDifferentiation (Add(
-                                              (Mul(
-                                                  CstI 10, 
-                                                  Var "x"
-                                              )),
-                                              (Mul ((Mul(CstI 13, CstI 23)), Var "y"))
-                                          ))
