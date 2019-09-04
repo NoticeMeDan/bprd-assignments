@@ -48,7 +48,7 @@ let rec eval e (env : (string * int) list) : int =
 let example1 = Prim("==", Prim("max", CstI 1, CstI 2), Prim("min", CstI 2, CstI 3))
 
 // 1.2
-
+// (i)
 type aexpr =
     | CstI of int
     | Var of string
@@ -56,10 +56,12 @@ type aexpr =
     | Mul of aexpr * aexpr
     | Sub of aexpr * aexpr
     
+// (ii)
 let e1 = Sub(Var "v", Add(Var "w", Var "z"))
 let e2 = Mul(CstI 2, Sub(Var "v", Add(Var "w", Var "z")))
 let e3 = Add(Add(Var "x", Var "y"), Add(Var "z", Var "v"))
 
+// (iii)
 let rec fmt (exp: aexpr) : string =
     match exp with
     | CstI i -> string i
@@ -79,6 +81,7 @@ let isSimplifiable exp =
         | Mul(e, CstI 0) -> true
         | _ -> false
 
+// (iv)
 let rec simplify (exp : aexpr) : aexpr =
     match exp with
     | CstI i -> CstI i
@@ -104,4 +107,4 @@ let rec simplify (exp : aexpr) : aexpr =
 
 let test = Add(Mul(CstI 0, CstI 5), Sub(CstI 5, CstI 0))
 
-// TODO: v
+// (v)
