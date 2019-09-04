@@ -48,7 +48,7 @@ let rec eval e (env : (string * int) list) : int =
 let example1 = Prim("==", Prim("max", CstI 1, CstI 2), Prim("min", CstI 2, CstI 3))
 
 // 1.2
-
+// (i)
 type aexpr =
     | CstI of int
     | Var of string
@@ -56,18 +56,26 @@ type aexpr =
     | Mul of aexpr * aexpr
     | Sub of aexpr * aexpr
     
+// (ii)
 let e1 = Sub(Var "v", Add(Var "w", Var "z"))
 let e2 = Mul(CstI 2, Sub(Var "v", Add(Var "w", Var "z")))
 let e3 = Add(Add(Var "x", Var "y"), Add(Var "z", Var "v"))
 
+// (iii)
 let rec fmt (exp: aexpr) : string =
     match exp with
     | CstI i -> string i
     | Var x -> x
-    | Add(e1, e2) -> sprintf "%s + %s" (fmt e1) (fmt e2)
-    | Mul(e1, e2) -> sprintf "%s * %s" (fmt e1) (fmt e2)
-    | Sub(e1, e2) -> sprintf "%s - %s" (fmt e1) (fmt e2)
+    | Add(e1, e2) -> sprintf "(%s + %s)" (fmt e1) (fmt e2)
+    | Mul(e1, e2) -> sprintf "(%s * %s)" (fmt e1) (fmt e2)
+    | Sub(e1, e2) -> sprintf "(%s - %s)" (fmt e1) (fmt e2)
 
+//tests
+let fmtTest1 = fmt (Sub(Var "x", CstI 34))  = "(x - 34)"
+let fmtTest2 = fmt (CstI 1)                 = "1"
+let fmtTest3 = fmt (Var "x")                = "x"
+
+// (iv)
 let isSimplifiable exp =
     match exp with
         | Add(CstI 0, e)
@@ -104,4 +112,31 @@ let rec simplify (exp : aexpr) : aexpr =
 
 let test = Add(Mul(CstI 0, CstI 5), Sub(CstI 5, CstI 0))
 
-// TODO: v
+// (v)
+let rec symbolicDifferentiation exp : aexpr =
+   let derivative' =
+       match exp with
+       | Var x       -> CstI 1
+       | CstI i      -> CstI 0
+       | Add(e1, e2) -> Add(symbolicDifferentiation(e1), symbolicDifferentiation(e2))
+       | Sub(e1, e2) -> Sub(symbolicDifferentiation(e1), symbolicDifferentiation(e2))
+       | Mul(e1, e2) -> Add(Mul(symbolicDifferentiation(e1), e2), Mul(e1, symbolicDifferentiation(e2)))
+       | _ -> CstI 0
+   simplify derivative'
+
+//tests with e1, e2, e3
+let diffTest_1 = symbolicDifferentiation e1
+let diffTest_2 = symbolicDifferentiation e2
+let diffTest_3 = symbolicDifferentiation e3
+
+//5x + 0 -> 5
+let diffTest_4 = symbolicDifferentiation (Add(Mul(CstI 5, Var "x"), CstI 0))
+
+//2x + 7 -> 2
+let diffTest_5 = symbolicDifferentiation (Add(Mul(CstI 2, Var "x"), CstI 3))
+
+//x -> 1
+let diffTest_6 = symbolicDifferentiation (Var "x")
+
+//x8 -> 8
+let diffTest_7 = symbolicDifferentiation (Mul(CstI 8, Var "x"))
