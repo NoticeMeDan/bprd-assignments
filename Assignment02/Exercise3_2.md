@@ -18,6 +18,7 @@ Solution:
 Try to find a DFA corresponding to the NFA.
 
 Solution:  
+
 | State |  a  |  b  |  ba |    NFA States    |
 |:-----:|:---:|:---:|:---:|:----------------:|
 |   S0  |  S1 | Err | Err | {q0, q1, q2, q4} |
