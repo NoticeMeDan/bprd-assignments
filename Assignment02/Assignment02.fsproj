@@ -8,6 +8,7 @@
         <Compile Include="Library.fs" />
         <Content Include="Exercise3_2.md" />
         <Content Include="images\nfa.png" />
+        <Content Include="images\dfa.png" />
     </ItemGroup>
 
 </Project>

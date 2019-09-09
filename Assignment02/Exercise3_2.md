@@ -12,7 +12,17 @@ Solution:
 Construct the corresponding NFA.
 
 Solution:   
-The program i used to draw the NFA did not support special characters, so the epsilon character is written in text.
 ![](./images/nfa.png)
 
 ## DFA
+Try to find a DFA corresponding to the NFA.
+
+Solution:  
+| State |  a  |  b  |  ba |    NFA States    |
+|:-----:|:---:|:---:|:---:|:----------------:|
+|   S0  |  S1 | Err | Err | {q0, q1, q2, q4} |
+|   S1  | Err |  S2 |  S3 |   {q1, q2, q4}   |
+|   S2  | Err |  S2 |  S3 |   {q2, q3, q4}   |
+|   S3  | Err |  S2 |  S3 |   {q2, q3, q4}   |
+
+![](./images/dfa.png)
