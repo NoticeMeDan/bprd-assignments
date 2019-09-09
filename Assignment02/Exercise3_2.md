@@ -19,11 +19,13 @@ Try to find a DFA corresponding to the NFA.
 
 Solution:  
 
-| State |  a  |  b  |  ba |    NFA States    |
-|:-----:|:---:|:---:|:---:|:----------------:|
-|   S0  |  S1 | Err | Err | {q0, q1, q2, q4} |
-|   S1  | Err |  S2 |  S3 |   {q1, q2, q4}   |
-|   S2  | Err |  S2 |  S3 |   {q2, q3, q4}   |
-|   S3  | Err |  S2 |  S3 |   {q2, q3, q4}   |
+| State |  a  |  b  |  ba |    NFA States    | Accepting |
+|:-----:|:---:|:---:|:---:|:----------------:|:---------:|
+|   S0  |  S1 | Err | Err | {q0, q1, q2, q4} |    Yes    |
+|   S1  | Err |  S2 |  S3 |   {q1, q2, q4}   |    Yes    |
+|   S2  | Err |  S2 |  S3 |   {q2, q3, q4}   |    Yes    |
+|   S3  | Err |  S2 |  S3 |   {q2, q3, q4}   |    Yes    |
 
 ![](./images/dfa.png)
+
+Note: There is an error in the regex, making it match on empty string.
