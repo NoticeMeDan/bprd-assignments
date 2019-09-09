@@ -7,6 +7,8 @@ of the sequence of grammar rules (A–I) used.
 
 Solution:
 
+This is the format that Niels proposed on LearnIT. It is very confusing, and i have no idea how it works.
+
 ```
 Main
     rule A
