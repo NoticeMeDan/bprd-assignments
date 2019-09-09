@@ -9,8 +9,10 @@
         <Content Include="Exercise3_2.md" />
         <Content Include="images\nfa.png" />
         <Content Include="images\dfa.png" />
+        <Content Include="images\exercise3_4.png" />
         <Content Include="Exercise3_3.md" />
         <Content Include="Exercise3_4.md" />
+        <Content Include="exercise3_4.drawio" />
     </ItemGroup>
 
 </Project>

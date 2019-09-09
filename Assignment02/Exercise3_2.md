@@ -28,4 +28,4 @@ Solution:
 
 ![](./images/dfa.png)
 
-Note: There is an error in the regex, making it match on empty string.
+Note: There is an error in the regex, making it accept on empty string. This is the reason why the DFA also S0 state is also accepting.

@@ -7,4 +7,14 @@ of the sequence of grammar rules (A–I) used.
 
 Solution:
 
-Og i s
+```
+Main
+    rule A
+Expr EOF
+    rule F
+LET NAME(z) EQ Expr IN Expr END
+    rule H
+    rule G
+Expr PLUS Expr
+Expr TIMES Expr
+```
