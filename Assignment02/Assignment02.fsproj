@@ -5,7 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Library.fs"/>
+        <Compile Include="Library.fs" />
+        <Content Include="Exercise3_2.md" />
+        <Content Include="images\nfa.png" />
     </ItemGroup>
 
 </Project>
