@@ -7,7 +7,9 @@ of the sequence of grammar rules (A–I) used.
 
 Solution:
 
-This is the format that Niels proposed on LearnIT. It is very confusing, and i have no idea how it works.
+This is the format that Niels proposed on LearnIT. 
+It is very confusing, and i have no idea how it works, so i decided that i 
+would write the full grammar in the bottom, and then "simplify" all the way up. 
 
 ```
 Main
@@ -15,8 +17,18 @@ Main
 Expr EOF
     rule F
 LET NAME(z) EQ Expr IN Expr END
-    rule H
     rule G
-Expr PLUS Expr
-Expr TIMES Expr
+LET NAME(z) EQ Expr TIMES Expr END
+    rule C
+LET NAME(z) EQ Expr IN Expr TIMES CSTINT(3) END
+    rule H
+LET NAME(z) EQ Expr PLUS Expr TIMES CSTINT(3) END
+    rule C
+LET NAME(z) EQ Expr IN Expr PLUS CSTINT(2) TIMES CSTINT(3) END
+    rule B
+LET NAME(z) EQ Expr IN NAME(z) PLUS CSTINT(2) TIMES CSTINT(2) END
+    rule E
+LET NAME(z) EQ LPAR Expr RPAR IN NAME(z) PLUS CSTINT(2) TIMES CSTINT(3) END
+    rule C
+LET NAME(z) EQ LPAR CSTINT(17) RPAR IN NAME(z) PLUS CSTINT(2) TIMES CSTINT(3) END
 ```
