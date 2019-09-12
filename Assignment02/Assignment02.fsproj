@@ -5,7 +5,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Absyn.fs" />
         <Compile Include="Library.fs" />
+        <Compile Include="ExprLex.fs" />
+        <Compile Include="ExprPar.fs" />
+        <Compile Include="Parse.fs" />
+        <Compile Include="Expr.fs" />
         <Content Include="Exercise3_2.md" />
         <Content Include="images\nfa.png" />
         <Content Include="images\dfa.png" />
@@ -13,6 +18,10 @@
         <Content Include="Exercise3_3.md" />
         <Content Include="Exercise3_4.md" />
         <Content Include="exercise3_4.drawio" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsLexYacc" Version="9.0.2" />
     </ItemGroup>
 
 </Project>

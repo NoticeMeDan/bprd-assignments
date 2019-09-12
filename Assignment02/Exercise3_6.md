@@ -7,7 +7,7 @@ that parses a string as an expression and compiles it to stack machine code.
 
 Solution:
 
-Add the following code to Parse.fs
+Add the following code to Expr.fs
 
 ```
 compString s = scomp (Parse.fromString s) [];
