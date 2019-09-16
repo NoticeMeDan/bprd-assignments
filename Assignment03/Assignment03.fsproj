@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Library.fs" />
+        <Compile Include="exercise4_1\Absyn.fs" />
+        <Compile Include="exercise4_1\Fun.fs" />
+        <Content Include="exercise4_1\FunLex.fsl" />
+        <Content Include="exercise4_1\FunPar.fsy" />
+        <Content Include="exercise4_1\grammar.txt" />
+        <Compile Include="exercise4_1\Parse.fs" />
+        <Compile Include="exercise4_1\ParseAndRun.fs" />
+        <Content Include="exercise4_1\README.TXT" />
+        <Content Include="exercise4_2.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsLexYacc" Version="9.0.2" />
+    </ItemGroup>
+
+</Project>
