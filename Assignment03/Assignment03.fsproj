@@ -6,14 +6,14 @@
 
     <ItemGroup>
         <Compile Include="Library.fs" />
-        <Compile Include="exercise4_1\Absyn.fs" />
-        <Compile Include="exercise4_1\Fun.fs" />
-        <Content Include="exercise4_1\FunLex.fsl" />
-        <Content Include="exercise4_1\FunPar.fsy" />
-        <Content Include="exercise4_1\grammar.txt" />
-        <Compile Include="exercise4_1\Parse.fs" />
-        <Compile Include="exercise4_1\ParseAndRun.fs" />
-        <Content Include="exercise4_1\README.TXT" />
+        <Compile Include="code\Absyn.fs" />
+        <Compile Include="code\Fun.fs" />
+        <Content Include="code\FunLex.fsl" />
+        <Content Include="code\FunPar.fsy" />
+        <Content Include="code\grammar.txt" />
+        <Compile Include="code\Parse.fs" />
+        <Compile Include="code\ParseAndRun.fs" />
+        <Content Include="code\README.TXT" />
         <Content Include="exercise4_2.md" />
     </ItemGroup>
 
