@@ -28,7 +28,8 @@
 %start Main
 %type <Absyn.expr> Main Expr AtExpr Const
 %type <Absyn.expr> AppExpr
-
+%type <Absyn.expr list> AppExprList (*  added for 4.4 *)
+%type <string list> NAMELIST        (*  added for 4.4 *)
 %%
 
 Main:
@@ -50,16 +51,29 @@ Expr:
   | Expr GT    Expr                     { Prim(">",  $1, $3)     }
   | Expr LT    Expr                     { Prim("<",  $1, $3)     }
   | Expr GE    Expr                     { Prim(">=", $1, $3)     }
+  | Expr LE    Expr                     { Prim("<=", $1, $3)     }
   | Expr AND   Expr                     { If($1, $3, CstB false) }   (*  added for 4.5 *)
   | Expr OR    Expr                     { If($1, CstB true, $3 ) }   (*  added for 4.5 *)
 ;
 
+(*  added for 4.4 *)
+NAMELIST:
+	NAME					      {[$1]}
+	| NAME NAMELIST			{$1::$2}
+;
+
 AtExpr:
-    Const                               { $1                     }
-  | NAME                                { Var $1                 }
-  | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
-  | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
-  | LPAR Expr RPAR                      { $2                     }
+    Const                                 { $1                     }
+  | NAME                                  { Var $1                 }
+  | LET NAME EQ Expr IN Expr END          { Let($2, $4, $6)        }
+  | LET NAME NAMELIST EQ Expr IN Expr END { Letfun($2, $3, $5, $7) }  (*  changed for 4.4 *)
+  | LPAR Expr RPAR                        { $2                     }
+;
+
+(*  added for 4.4 *)
+AppExprList:
+	| AtExpr							      {[$1]}
+	| AtExpr AppExprList				{$1::$2}
 ;
 
 AppExpr:
