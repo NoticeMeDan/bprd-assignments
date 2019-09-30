@@ -68,8 +68,8 @@ Intheemptyenvironmentthetwoexpressionsshownaboveshouldevaluatetothese two closur
 
 ##### Solution:
 
-### Exercise6.3 
-Extendthemicro-MLlexerandparserspeciﬁcationsinFunLex.fsl and FunPar.fsy to permit anonymous functions. The concrete syntax may be as in F#: ``fun x -> expr`` or as in Standard ML: ``fn x => expr`` , wherex is a variable. The micro-ML examples from Exercise 6.1 can now be written in these two alternative ways: 
+### Exercise 6.3 
+Extend the micro-ML lexer and parser speciﬁcations in ``FunLex.fsl`` and ``FunPar.fsy`` to permit anonymous functions. The concrete syntax may be as in F#: ``fun x -> expr`` or as in Standard ML: ``fn x => expr`` , wherex is a variable. The micro-ML examples from Exercise 6.1 can now be written in these two alternative ways: 
 
 ````
 let add x = fun y -> x+y in add 2 5 end
@@ -79,7 +79,34 @@ let add = fun x -> fun y -> x+y in add 2 5 end
 
 ##### Solution:
 
-### Exercise6.4 
+Changes to ``FunLex.fsl``
+
+Added keywords:
+````
+| "fun"   -> FN1  
+| "fn"    -> FN2 
+````
+
+Added tokens for parsing:
+````
+| "->"            { BODY1 }  
+| "=>"            { BODY2 }  
+````
+
+Changes to ``FunPar.psy``
+
+Tokens added in the parser
+````
+%token FN1 FN2 BODY1 BODY2 /* Added for 6.3  */
+````
+
+Added the expression to ``AtExpr``
+````
+| FN1 NAME BODY1 Expr                 { Fun($2, $4) } 
+| FN2 NAME BODY2 Expr                 { Fun($2, $4) }
+````
+
+### Exercise 6.4 
 This exercise concerns type rules for ML-polymorphism, as shown in Fig. 6.1. 
 #### Part (i) 
 Build a type rule tree for this micro-ML program (in the let-body, the type of f should be polymorphic—why?):

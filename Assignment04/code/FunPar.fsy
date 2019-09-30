@@ -12,6 +12,7 @@
 %token <bool> CSTBOOL
 
 %token ELSE END FALSE IF IN LET NOT THEN TRUE
+%token FN1 FN2 BODY1 BODY2  /* Added for 6.3  */
 %token PLUS MINUS TIMES DIV MOD
 %token EQ NE GT LT GE LE
 %token LPAR RPAR 
@@ -57,6 +58,8 @@ AtExpr:
   | NAME                                { Var $1                 }
   | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
   | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
+  | FN1 NAME BODY1 Expr                 { Fun($2, $4)            } /* Added for 6.3  */
+  | FN2 NAME BODY2 Expr                 { Fun($2, $4)            } /* Added for 6.3  */
   | LPAR Expr RPAR                      { $2                     }
 ;
 
