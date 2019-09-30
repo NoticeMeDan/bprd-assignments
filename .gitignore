@@ -5,3 +5,8 @@ obj/
 .ionide
 output/
 out/
+
+# FsLexYacc symlinks
+fsyacc
+fslex
+FsLexYacc.Runtime.dll

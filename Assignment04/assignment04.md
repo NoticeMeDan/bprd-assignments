@@ -4,8 +4,8 @@
 Download and unpack ``fun1.zip`` and ``fun2.zip`` and build the micro-ML higher-order evaluator as described in ﬁle ``README.TXT`` point E. Then run the evaluator on the following four programs. Is the result of the third one as expected? Explain the result of the last one: 
 
 ````
-let add x = let f y = x+y 
-in f end in add 2 5 end
+let add x = let f y = x+y in f end
+in add 2 5 end
 
 let add x = let f y = x+y in f end 
 in let addtwo = add 2 
@@ -24,6 +24,10 @@ in add 2 end
 ````
 
 ##### Solution:
+The third program returns 7, and not 82, as `x` is already defined in addTwo's closure as 2.  
+
+The fourth program returns a closure containing the function `and`, containing a closure containing the variable `x` set to 2.
+This is due to the fact that `add` is a higher order function, in the sense that it returns a function that receives the second parameter. As the program only sets the first parameter, the result of the program is `add`s inner function.
 
 ### Exercise 6.2 
 Add anonymous functions, similar to F#’s ``fun x -> ...``, to the micro-ML higher-order functional language abstract syntax:

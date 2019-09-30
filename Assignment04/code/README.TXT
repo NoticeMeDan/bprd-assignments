@@ -64,7 +64,7 @@ E. Using the lexer, parser and higher-order evaluator together:
    fsharpi -r FsLexYacc.Runtime.dll Absyn.fs FunPar.fs FunLex.fs Parse.fs HigherFun.fs ParseAndRunHigher.fs
 
    open ParseAndRunHigher;;
-   run (fromString @"let twice f = let g x = f(f(x)) in g end 
+    run (fromString @"let twice f = let g x = f(f(x)) in g end 
                      in let mul3 z = z*3 in twice mul3 2 end end");;
    #q;;
 
