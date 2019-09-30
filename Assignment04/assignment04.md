@@ -57,7 +57,7 @@ type value =
     | ... 
     | Clos of string* expr * value env (* (x,body,declEnv) *) 
 ````
-Intheemptyenvironmentthetwoexpressionsshownaboveshouldevaluatetothese two closure values:
+In the empty environment the two expressions shown above should evaluate to these two closure values:
 ````
  Clos("x", Prim("*", CstI 2, Var "x"), []) 
  Clos("z", Prim("+", Var "z", Var "y"), [(y,22)])
@@ -67,7 +67,19 @@ Intheemptyenvironmentthetwoexpressionsshownaboveshouldevaluatetothese two closur
 
 
 ##### Solution:
+Changes to `Absyn.fs`:  
+Added following value to expr:
+```f# script
+  | Fun of string * expr
+```
 
+Changes to `HigherFun.fs`:  
+Added following match option to `eval`:  
+```f# script
+    | Fun(f, fBody) ->
+      let funEnv = Closure(f, fBody, env) :: env
+      eval fBody funEnv
+```
 ### Exercise 6.3 
 Extend the micro-ML lexer and parser speciﬁcations in ``FunLex.fsl`` and ``FunPar.fsy`` to permit anonymous functions. The concrete syntax may be as in F#: ``fun x -> expr`` or as in Standard ML: ``fn x => expr`` , wherex is a variable. The micro-ML examples from Exercise 6.1 can now be written in these two alternative ways: 
 
