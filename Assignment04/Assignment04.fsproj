@@ -6,5 +6,18 @@
 
     <ItemGroup>
         <Content Include="assignment04.md" />
+        <Content Include="code/Absyn.fs" />
+        <Content Include="code/Fun.fs" />
+        <Content Include="code/FunLex.fsl" />
+        <Content Include="code/FunPar.fsy" />
+        <Content Include="code/grammar.txt" />
+        <Content Include="code/HigherFun.fs" />
+        <Content Include="code/LinkedList.java" />
+        <Content Include="code/Parse.fs" />
+        <Content Include="code/ParseAndRun.fs" />
+        <Content Include="code/ParseAndRunHigher.fs" />
+        <Content Include="code/ParseAndType.fs" />
+        <Content Include="code/README.TXT" />
+        <Content Include="code/TypeInference.fs" />
     </ItemGroup>
 </Project>
