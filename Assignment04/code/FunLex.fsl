@@ -30,8 +30,8 @@ let keyword s =
     | "not"   -> NOT
     | "then"  -> THEN
     | "true"  -> CSTBOOL true
-    | "fun"   -> FUN1  (* Added for 6.3 *)
-    | "fn"    -> FUN2  (* Added for 6.3 *)
+    | "fun"   -> FN1  (* Added for 6.3 *)
+    | "fn"    -> FN2  (* Added for 6.3 *)
     | _       -> NAME s
 }
 
@@ -57,8 +57,8 @@ rule Token = parse
   | '%'             { MOD }
   | '('             { LPAR }
   | ')'             { RPAR }
-  | "->"            { INBODY1 }  (* Added for 6.3 *)
-  | "=>"            { INBODY2 }  (* Added for 6.3 *)
+  | "->"            { BODY1 }  (* Added for 6.3 *)
+  | "=>"            { BODY2 }  (* Added for 6.3 *)
   | eof             { EOF }
   | _               { failwith "Lexer error: illegal symbol" }
 
