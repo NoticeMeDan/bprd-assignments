@@ -126,7 +126,7 @@ Build a type rule tree for this micro-ML program (in the let-body, the type of f
 ``let f x = 1 in f f end``
 
 ##### Solution:
-
+See Exercise_6_4.png part (i)
 #### Part (ii) 
 Build a type rule tree for this micro-ML program (in the let-body, f should not be polymorphic—why?):
 ````
@@ -135,49 +135,94 @@ in f 20 end
 ````
 
 ##### Solution:
+See Exercise_6_4.png part (ii)
 
 ### Exercise 6.5 
 Download ``fun2.zip`` and build the micro-ML higher-order type inference as described in ﬁle README.TXT point F.
 
 ##### Part (1)  
-Use the type inference on the micro-ML programs shown below, and report what type the program has. Some of the type inferences will fail because the programsarenottypableinmicro-ML;inthosecases,explainwhytheprogram is not typable:
+Use the type inference on the micro-ML programs shown below, and report what type the program has. Some of the type inferences will fail because the programs are not typable in micro-ML; in those cases, explain why the program is not typable:
 
 ```
 let f x = 1 
 in f f end
 
+val it : string = "int"
+```
+
+```
 let f g = g g 
 in f end
 
+error circular
+g is of the type a' which is applied a' -> a' ->  .. a'
+```
+
+```
 let f x = let g y = y 
 in g false end in f 42 end
 
+type error: bool and int
+```
+
+This happens because a type param thats used in an enclosed scope cannot be generalized. (i.e x is bound to int and y has the same type, but y is set to bool interfering with the type.)
+
+
+```
 let f x = 
     let g y = if true then y else x 
     in g false end
 in f 42 end
 
-let f x = 
-    let g y = if true then y else x 
-    in g false end 
-in f true end
-
+val it : string = "bool"
 ```
-##### Solution:
-
 
 ##### Part (2) 
 Write micro-ML programs for which the micro-ML type inference report the following types:
 
- • ``bool -> bool`` 
- • ``int -> int ``
- • ``int -> int -> int ``
- • ``’a -> ’b -> ’a ``
- • ``’a -> ’b -> ’b ``
- • ``(’a -> ’b) -> (’b -> ’c) -> (’a -> ’c) ``
- • ``’a -> ’b ``
- • ``’a`` 
+ - ``bool -> bool`` 
+   - ``let f x = if x then true else false in f end``
+
+
+ - ``int -> int ``
+   - `` let f x = x+1 in f end ``
+
+ - ``int -> int -> int ``
+   - ```` 
+        let f x =
+		    let f2 x2 = x2 + 1 + x in f2 end
+	    in f end
+     ```` 
+
+ - ``’a -> ’b -> ’a ``
+   - ````
+     let f x =
+		let f2 x2 = x in f2 end
+	 in f end
+     ````
+
+ - ``’a -> ’b -> ’b ``
+   - ````
+     let f x =
+		let f2 x2 = x2 in f2 end
+	 in f end
+     ````
+
+ - ``(’a -> ’b) -> (’b -> ’c) -> (’a -> ’c) ``
+   - ````
+      let f1 x1 = 
+		let f2 x2 = 
+			let f3 x3 = 
+				x2 (x1 x3)
+			in f3 end
+		in f2 end
+	  in f1 end
+     ````
+
+ - ``’a -> ’b ``
+   - `` let f x = f x in f end  ``
+
+ - ``’a`` 
+    - `` let f x = f x in f 2 end ``
  
  Remember that the type arrow ``(->)`` is right associative, ``soint -> int -> int`` is the same as ``int -> (int -> int)``, and that the choice of type variables does not matter, so the type scheme ``’h -> ’g -> ’h`` is the same as ``a’ -> ’b -> ’a``.
-
-##### Solution:
