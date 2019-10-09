@@ -5,7 +5,7 @@
 
 module CLex
   
-open Microsoft.FSharp.Text.Lexing
+open FSharp.Text.Lexing
 open CPar;
 
 let lexemeAsString lexbuf = 
