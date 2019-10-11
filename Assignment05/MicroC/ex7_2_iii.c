@@ -12,10 +12,10 @@ void histogram(int n, int ns[], int max, int freq[]){
   }
 }
 
-
 void main(int n) { 
     
     int i;
+    int j;
     int arr[7];
     int freq[100];
   
@@ -35,9 +35,9 @@ void main(int n) {
 
     histogram(7, arr, n, freq);
     
-    i = 0;
-    while (i < n) {
-      print freq[i];
-      i = i + 1;
+    j = 0;
+    while (j < n) {
+      print freq[j];
+      j = j + 1;
     }
 }
