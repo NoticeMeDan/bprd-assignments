@@ -1,6 +1,6 @@
 (* File MicroC/Interp.c
    Interpreter for micro-C, a fraction of the C language 
-   sestoft@itu.dk * 2010-01-07, 2014-10-18
+   sestoft@itu.dk * 2010-01-07
 
    A value is an integer; it may represent an integer or a pointer,
    where a pointer is just an address in the store (of a variable or
@@ -152,7 +152,7 @@ and stmtordec stmtordec locEnv gloEnv store =
 (* Evaluating micro-C expressions *)
 
 and eval e locEnv gloEnv store : int * store = 
-    match e with
+  match e with
     | Access acc     -> let (loc, store1) = access acc locEnv gloEnv store
                         (getSto store1 loc, store1) 
     | Assign(acc, e) -> let (loc, store1) = access acc locEnv gloEnv store
@@ -194,6 +194,15 @@ and eval e locEnv gloEnv store : int * store =
       let (i1, store1) as res = eval e1 locEnv gloEnv store
       if i1<>0 then res else eval e2 locEnv gloEnv store1
     | Call(f, es) -> callfun f es locEnv gloEnv store 
+    | PreInc acc       ->
+        let (address, store2) as res = access acc locEnv gloEnv store
+        let rvalue = getSto store2 address |> (+) 1
+        (address, setSto store2 address rvalue)
+    | PreDec acc       ->
+        let (address, store2) as res = access acc locEnv gloEnv store
+        let rvalue = getSto store2 address |> (-) 1
+        (address, setSto store2 address rvalue)
+    
 
 and access acc locEnv gloEnv store : int * store = 
     match acc with 
