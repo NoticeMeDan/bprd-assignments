@@ -3,9 +3,9 @@ Exercise 8.1 Download microc.zip from the book homepage, unpack it to a
 folder MicroC, and build the micro-C compiler as explained in README.TXT
 step (B).
 
-### (i)
+### 8.1 (i)
 
-- (a)
+- 8.1 (i) (a)
 ````
  compile "ex11";;
  val it : Machine.instr list =
@@ -21,7 +21,7 @@ step (B).
    CSTI 2; ADD; LDI; ADD; CSTI 0; STI; STI; INCSP -1; GETBP; CSTI 2; ADD; ...]
 ````
 
-- (b)
+- 8.1 (i) (b)
 ````
   java Machine ex11.out 8
   ....
@@ -31,9 +31,10 @@ step (B).
   8 3 1 6 2 5 7 4
   8 4 1 3 6 2 7 5
   
-  Ran 0.055 seconds
+  Ran 0.059 seconds
 ````
-### (ii)
+### 8.1 (ii)
+
 
 ## Exercise 8.3
 
