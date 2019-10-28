@@ -94,6 +94,10 @@ Stmt:
   | StmtU                               { $1 }
 ;
 
+CaseList:
+    CASE Expr COLON LBRACE StmtOrDecSeq RBRACE          {[Case($2, Block $5)]}
+  | CASE Expr COLON LBRACE StmtOrDecSeq RBRACE CASELIST {(Case($2, Block $5))::$7}
+
 StmtM:  /* No unbalanced if-else */
     Expr SEMI                           { Expr($1)             }
   | RETURN SEMI                         { Return None          }
@@ -101,6 +105,7 @@ StmtM:  /* No unbalanced if-else */
   | Block                               { $1                   }
   | IF LPAR Expr RPAR StmtM ELSE StmtM  { If($3, $5, $7)       }
   | WHILE LPAR Expr RPAR StmtM          { While($3, $5)        }
+  | SWITCH LPAR Expr RPAR LBRACE CASELIST RBRACE { Switch($3, $6) }
 ;
 
 StmtU:
