@@ -45,3 +45,5 @@ Changes to `Absyn.fs`, `CLex.fsl`, `CPar.fsy` and `Comp.fs`.
 
 ## Exercise 8.6
 Changes to `Absyn.fs`, `CLex.fsl`, `CPar.fsy` and `Comp.fs`.
+
+The compilation scheme is really messy with tonnes of duplicates on the stack, but it should work.
