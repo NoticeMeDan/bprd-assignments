@@ -128,7 +128,13 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       cExpr e varEnv funEnv @ [IFZERO labelse] 
       @ cExpr e1 varEnv funEnv @ [GOTO labend]
       @ [Label labelse] @ cExpr e2 varEnv funEnv
-      @ [Label labend]             
+      @ [Label labend]
+    | Switch(expr, caseList) ->
+      let generateCase (num, stmt) = 
+        let labelNext = newLabel()
+        cStmt expr varEnv funEnv @ [CSTI num] @ [EQ] @ [IFZERO labelNext] @ cStmt stmt varEnv funEnv @ [Label labelNext]
+
+      List.collect generateCase caseList      
     | While(e, body) ->
       let labbegin = newLabel()
       let labtest  = newLabel()

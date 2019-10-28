@@ -41,5 +41,7 @@ step (B).
 ## Exercise 8.4
 
 ## Exercise 8.5
+Changes to `Absyn.fs`, `CLex.fsl`, `CPar.fsy` and `Comp.fs`.
 
 ## Exercise 8.6
+Changes to `Absyn.fs`, `CLex.fsl`, `CPar.fsy` and `Comp.fs`.
