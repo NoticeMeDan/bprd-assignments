@@ -97,6 +97,7 @@ Stmt:
 CaseList:
     CASE Expr COLON LBRACE StmtOrDecSeq RBRACE          {[Case($2, Block $5)]}
   | CASE Expr COLON LBRACE StmtOrDecSeq RBRACE CASELIST {(Case($2, Block $5))::$7}
+;
 
 StmtM:  /* No unbalanced if-else */
     Expr SEMI                           { Expr($1)             }
