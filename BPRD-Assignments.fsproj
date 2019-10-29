@@ -1,16 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
-        <RootNamespace>BPRD_Assignments</RootNamespace>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <Compile Include="Library.fs" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <PackageReference Include="FsLexYacc" Version="9.0.2" />
-    </ItemGroup>
-
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>BPRD_Assignments</RootNamespace>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Library.fs" />
+    <Compile Include="Assignment06/MicroC/CPar.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FsLexYacc" Version="9.0.2" />
+  </ItemGroup>
 </Project>

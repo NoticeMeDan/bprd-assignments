@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Compile Include="code/Absyn.fs" />
+      <Compile Include="code/CLex.fs" />
+      <Compile Include="code/Comp.fs" />
+      <Compile Include="code/Contcomp.fs" />
+      <Compile Include="code/CPar.fs" />
+      <Compile Include="code/CPar.fsi" />
+      <Compile Include="code/Interp.fs" />
+      <Compile Include="code/Machine.fs" />
+      <Compile Include="code/MicroCC.fs" />
+      <Compile Include="code/Parse.fs" />
+      <Compile Include="code/ParseAndComp.fs" />
+      <Compile Include="code/ParseAndContcomp.fs" />
+      <Compile Include="code/ParseAndRun.fs" />
+    </ItemGroup>
+
+</Project>
