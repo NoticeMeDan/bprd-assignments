@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,5 +19,9 @@
         <Content Include="code/ParseAndType.fs" />
         <Content Include="code/README.TXT" />
         <Content Include="code/TypeInference.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsLexYacc" Version="10.0.0" />
     </ItemGroup>
 </Project>

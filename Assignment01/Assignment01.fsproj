@@ -1,13 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp2.2</TargetFramework>
+        <TargetFramework>netcoreapp2.1</TargetFramework>
         <RootNamespace>Assigment01</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="Intro2.fs" />
         <Compile Include="Intcomp1.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FsLexYacc" Version="10.0.0" />
     </ItemGroup>
 
 </Project>
