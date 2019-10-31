@@ -122,19 +122,14 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) : instr list =
       @ cStmt stmt1 varEnv funEnv @ [GOTO labend]
       @ [Label labelse] @ cStmt stmt2 varEnv funEnv
       @ [Label labend]
-    | Ternary(e, e1, e2) -> 
-      let labelse = newLabel()
-      let labend  = newLabel()
-      cExpr e varEnv funEnv @ [IFZERO labelse] 
-      @ cExpr e1 varEnv funEnv @ [GOTO labend]
-      @ [Label labelse] @ cExpr e2 varEnv funEnv
-      @ [Label labend]
-    | Switch(expr, caseList) ->
-      let generateCase (num, stmt) = 
+    | Switch(expr, cases) ->
+      let generateCaseByteCode (num, stmt) = 
         let labelNext = newLabel()
-        cStmt expr varEnv funEnv @ [CSTI num] @ [EQ] @ [IFZERO labelNext] @ cStmt stmt varEnv funEnv @ [Label labelNext]
+        cExpr expr varEnv funEnv @ [CSTI num] 
+        @ [EQ] @ [IFZERO labelNext] 
+        @ cStmt stmt varEnv funEnv @ [Label labelNext]
 
-      List.collect generateCase caseList      
+        List.collect generateCaseByteCode cases 
     | While(e, body) ->
       let labbegin = newLabel()
       let labtest  = newLabel()
@@ -218,6 +213,13 @@ and cExpr (e : expr) (varEnv : varEnv) (funEnv : funEnv) : instr list =
       @ cExpr e2 varEnv funEnv
       @ [GOTO labend; Label labtrue; CSTI 1; Label labend]
     | Call(f, es) -> callfun f es varEnv funEnv
+    | Ternary(e, e1, e2) -> 
+      let labelse = newLabel()
+      let labend  = newLabel()
+      cExpr e varEnv funEnv @ [IFZERO labelse] 
+      @ cExpr e1 varEnv funEnv @ [GOTO labend]
+      @ [Label labelse] @ cExpr e2 varEnv funEnv
+      @ [Label labend]
 
 (* Generate code to access variable, dereference pointer or index array.
    The effect of the compiled code is to leave an lvalue on the stack.   *)
