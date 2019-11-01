@@ -3,16 +3,16 @@ public static void SelectionSort(int[]);
    Stack=4, Locals=4, Args_size=1 // Set stack size, amount of local variables, and number of method arguments
    0:	iconst_0          	// Push 0 on stack
    1:	istore_1          	// Store 0 in local variable 1
-   2:	iload_1           	// Push local variable 1 on stack
-   3:	aload_0				// Push 'this' on stack
-   4:	arraylength			// Push length of array on stack
-   5:	if_icmpge	57		// If var 0 is >= arraylength, go to instuction 57
-   8:	iload_1				// Push local variable 1 on stack
-   9:	istore_2			// Store var 1 in var 2
+   2:	iload_1              // Push local variable 1 on stack
+   3:	aload_0				   // Push 'this' on stack
+   4:	arraylength			   // Push length of array on stack
+   5:	if_icmpge	57		   // If var 0 is >= arraylength, go to instuction 57
+   8:	iload_1				   // Push local variable 1 on stack
+   9:	istore_2			      // Store var 1 in var 2
    10:	iload_1				// Push var 2 on stack
-   11:	iconst_1			// Push 1 on stack
-   12:	iadd				// Add 1 and var 2 together, and store it on stack
-   13:	istore_3			// Store add result in var 3
+   11:	iconst_1			   // Push 1 on stack
+   12:	iadd				   // Add 1 and var 2 together, and store it on stack
+   13:	istore_3			   // Store add result in var 3
    14:	iload_3				// Push var 3 on stack
    15:	aload_0				// Push 'this' on stack
    16:	arraylength			// Push array length on stack
@@ -25,13 +25,13 @@ public static void SelectionSort(int[]);
    25:	iaload				// Push array[var 2] on stack
    26:	if_icmpge	31		// If array[var 3] >= array[var 2], go to instruction 31
    29:	iload_3				// Push var 3 on stack
-   30:	istore_2			// Store var 3 in var 2
-   31:	iinc	3, 1		// Increment var 3 by 1
-   34:	goto	14			// Go to instruction 14
+   30:	istore_2			   // Store var 3 in var 2
+   31:	iinc	3, 1		   // Increment var 3 by 1
+   34:	goto	14			   // Go to instruction 14
    37:	aload_0				// Push 'this' on stack
    38:	iload_1				// Push var 1 on stack
    39:	iaload				// Push array[var 1] on stack
-   40:	istore_3			// Store array[var 1] in var 3
+   40:	istore_3			   // Store array[var 1] in var 3
    41:	aload_0				// Push 'this' on stack
    42:	iload_1				// Push var 1 on stack
    43:	aload_0				// Push 'this' on stack
@@ -42,6 +42,6 @@ public static void SelectionSort(int[]);
    48:	iload_2				// Push var 2 on stack
    49:	iload_3				// Push var 3 on stack
    50:	iastore				// Store var 3 in array[var 2]
-   51:	iinc	1, 1		// Increment var 1 by 1
-   54:	goto	2			// Go to instruction 2
+   51:	iinc	1, 1		   // Increment var 1 by 1
+   54:	goto	2			   // Go to instruction 2
    57:	return				// Return method
