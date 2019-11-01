@@ -1,4 +1,3 @@
-}
 // Lock-based queue with memory management mistake
 // sestoft@itu.dk * 2013-10-20
 
