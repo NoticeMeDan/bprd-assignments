@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp2.2</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="deliverables/9.3.md" />
+        <None Include="deliverables/QueueWithMistake.java" />
+    </ItemGroup>
+
+</Project>
