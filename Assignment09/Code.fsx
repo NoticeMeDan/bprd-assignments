@@ -56,3 +56,20 @@ let rec prodc list cont =
     match list with
     | [] -> cont 1
     | head::tail -> prodc tail (fun acc -> cont (head * acc))
+    
+(* 11.4 *)
+let rec prodcz list cont = (* prodc optimized to terminate if encountering zero *)
+    match list with
+    | [] -> cont 1
+    | head::tail ->
+        if head = 0
+        then 0
+        else  prodcz tail (fun acc -> cont (head * acc))
+
+let rec prodi list acc =
+    match list with
+    | [] -> acc
+    | head::tail ->
+        if head = 0
+        then 0
+        else prodi tail (acc * head)
