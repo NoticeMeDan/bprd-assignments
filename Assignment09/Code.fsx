@@ -64,7 +64,7 @@ let rec prodcz list cont = (* prodc optimized to terminate if encountering zero 
     | head::tail ->
         if head = 0
         then 0
-        else  prodcz tail (fun acc -> cont (head * acc))
+        else prodcz tail (fun acc -> cont (head * acc))
 
 let rec prodi list acc =
     match list with
