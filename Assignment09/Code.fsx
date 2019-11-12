@@ -7,7 +7,7 @@ let rec len xs =
 let rec lenc list cont =
     match list with
     | [] -> cont 0
-    | head::tail -> lenCon tail (fun acc -> cont (acc + 1))
+    | head::tail -> lenc tail (fun acc -> cont (acc + 1))
 
 printf "The answer is ’%d’ \n" (lenc [2; 5; 7] id)
 
