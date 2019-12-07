@@ -108,10 +108,15 @@ val ex5 : Absyn.expr =
 5 --------------------------------------------------------------------------------
 
 
+1)
+
+The stackframe 
+[ 4 -999 42 42 42 42 42 2 5 | 125 2 2 0 ]
+             stackframeskift^     | sp^
+                                bp^  
 
 
+2)
 
-
-
-
+Resultatet bliver ikke som forventet, da "optimeringerne" i Contcomp.fs gør at `printArray(a)` bliver lavet til et TCall (et tail call), som overskriver den gamle stackframe, hvilket resulterer i at 42'tallerne bliver overskrevet.
 
