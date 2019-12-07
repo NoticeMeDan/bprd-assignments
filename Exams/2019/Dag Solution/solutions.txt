@@ -98,6 +98,29 @@ val ex5 : Absyn.expr =
 3 --------------------------------------------------------------------------------
 
 
+2)
+
+type value =
+  | Int of int
+  | RecordV of (string * value) list
+  | Closure of string * string * expr * value env
+
+let rec eval (e : expr) (env : value env) : value =
+  match e with
+  | ...
+  | Record l -> RecordV(List.map (fun (a,b) -> (a,eval b env) ) l)
+      | Field(e,s) -> 
+        let v = eval e env
+        match v with
+        | RecordV l -> lookup l s 
+        | _ -> failwith "Not a record"
+  | ...    
+
+3)
+> run (Let ("x",Record [("field1", CstI 32);("field1",CstI 33)],Field (Var "x","field1")));;
+val it : HigherFun.value = Int 32
+
+og så lidt flere her.
 
 
 4 --------------------------------------------------------------------------------
