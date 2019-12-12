@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Library.fs" />
+    <Compile Include="Absyn.fs" />
+    <Compile Include="HigherFun.fs" />
+    <Compile Include="FunLex.fs" />
+    <Content Include="FunLex.fsl" />
+    <Compile Include="FunPar.fs" />
+    <Compile Include="FunPar.fsi" />
+    <Content Include="FunPar.fsy" />
+    <Compile Include="Parse.fs" />
+    <Content Include="README.TXT" />
+    <Compile Include="Fun.fs" />
+    <Content Include="LinkedList.java" />
+    <Compile Include="TypeInference.fs" />
+    <Compile Include="ParseAndType.fs" />
+    <Content Include="grammar.txt" />
+    <Compile Include="ParseAndRun.fs" />
+    <Compile Include="ParseAndRunHigher.fs" />
+  </ItemGroup>
+</Project>

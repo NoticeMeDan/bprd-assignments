@@ -4,6 +4,7 @@ bin/
 obj/
 .vs
 .ionide
+.DS_Store
 output/
 out/
 
