@@ -174,3 +174,38 @@ val it : Absyn.expr =
     ("x",Record [("field1", CstI 32); ("field2", CstI 33)],
      Prim ("+",Field (Var "x","field1"),Field (Var "x","field2")))
 ```
+
+# Opgave 3 - Evaluering af Records i Micro-ML
+## Delopgave 1
+
+## Delopgave 2
+Jeg starter med at tilføje `RecordV` union casen til `value` typen:
+```fsharp
+type value = 
+  | Int of int
+  | Closure of string * string * expr * value env
+  | RecordV of (string * value) list
+```
+
+Herefter tilføjer jeg følgende kodestump til `eval` funktionen:
+```fsharp
+    | Record elements -> 
+      RecordV(List.map (fun (label,rVal) -> (label,eval rVal env)) elements)
+    | Field(var, label) -> 
+      let eVar = eval var env
+      match eVar with
+      | RecordV record -> lookup record label
+      | _ -> failwith "Not a record"
+```
+
+Når der bliver fundet en `Record` i vores AST, så omdanner jeg det til et `RecordV`, ved at evaluere alle de expressions der indgår i tupel listen. Når der bliver fundet et field, så leder jeg efter en record med navnet `var` i funktionens `Closure`, og hvis det er fundet kigger jeg i den record efter en værdi hvor at dens label matcher `label` værdien.
+
+Hvis der i `RecordV` indgår flere tupler med samme label, så vil den første i listen blive valgt, det er derfor brugerens ansvar ikke at have duplikerede labels.
+
+## Delopgave 2
+```
+> run (Let ("x",Record [("field1", CstI 32);("field1",CstI 33)],Field (Var "x","field1")));;
+val it : HigherFun.value = Int 32
+```
+
+Magter ikke at tilføje dem alle, det er rent slavearbejde.
