@@ -21,6 +21,7 @@ let iconEx2 = Every(Write(Prim("*",FromTo(1,4), And(Write (CstS "\n"),FromTo(1,4
 
 3)
 
+//Fra Eliases svar <3 
 | Find(pat,str) ->
   let rec findIndex (i:int) =
     let index = str.IndexOf(pat,i) 
@@ -109,11 +110,11 @@ let rec eval (e : expr) (env : value env) : value =
   match e with
   | ...
   | Record l -> RecordV(List.map (fun (a,b) -> (a,eval b env) ) l)
-      | Field(e,s) -> 
-        let v = eval e env
-        match v with
-        | RecordV l -> lookup l s 
-        | _ -> failwith "Not a record"
+  | Field(e,s) -> 
+    let v = eval e env
+    match v with
+    | RecordV l -> lookup l s 
+    | _ -> failwith "Not a record"
   | ...    
 
 3)
