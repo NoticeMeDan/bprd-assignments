@@ -15,7 +15,7 @@
 %token PLUS MINUS TIMES DIV MOD
 %token EQ NE GT LT GE LE
 %token LPAR RPAR
-%token DOT LBRACK RBRACK SEMIC
+%token LBRA RBRA DOT SEMI
 %token EOF
 
 %left ELSE              /* lowest precedence  */
@@ -51,22 +51,21 @@ Expr:
   | Expr LT    Expr                     { Prim("<",  $1, $3)     }
   | Expr GE    Expr                     { Prim(">=", $1, $3)     }
   | Expr LE    Expr                     { Prim("<=", $1, $3)     }
-  | Expr DOT NAME                       { Field($1, $3)          }
+  | Expr DOT   NAME                     { Field($1, $3)          }
 ;
 
-RecordList:
-  | NAME EQ Expr                  { [($1, $3)]             }
-  | NAME EQ Expr SEMIC RecordList { ($1, $3) :: $5           }
-;
+Record:
+	| NAME EQ Expr                        { [($1, $3) ]            }
+	| NAME EQ Expr SEMI Record            { ($1, $3) :: $5         }
 
 AtExpr:
-    Const                                            { $1                      }
-  | NAME                                             { Var $1                  }
-  | LET NAME EQ Expr IN Expr END                     { Let($2, $4, $6)         }
-  | LET NAME EQ LBRACK RBRACK IN Expr END            { Let($2, Record([]), $7) }
-  | LET NAME EQ LBRACK RecordList RBRACK IN Expr END { Let($2, Record($5), $8) }
-  | LET NAME NAME EQ Expr IN Expr END                { Letfun($2, $3, $5, $7)  }
-  | LPAR Expr RPAR                                   { $2                      }
+    Const                               { $1                     }
+  | NAME                                { Var $1                 }
+  | LET NAME EQ Expr IN Expr END        { Let($2, $4, $6)        }
+  | LET NAME NAME EQ Expr IN Expr END   { Letfun($2, $3, $5, $7) }
+  | LPAR Expr RPAR                      { $2                     }
+  | LET NAME EQ LBRA RBRA IN Expr END        { Let($2, Record([]), $7) }
+  | LET NAME EQ LBRA Record RBRA IN Expr END { Let($2, Record($5), $8) }
 ;
 
 AppExpr:
