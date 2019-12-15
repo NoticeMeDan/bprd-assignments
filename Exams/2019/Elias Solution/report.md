@@ -272,6 +272,7 @@ let rec emitints getlab instr ints =
 Efterfulgt af følgende ændringer i `Machine.java`:
 * Tilføjer `BREAK` og `WAITKEYPRESS` konstanter som stemmer overens med dem i `Machine.fs`
 * Tilføjer håndtering af hvad der skal ske, når vi rammer `BREAK` og `WAITKEYPRESS` værdierne i bytecoden
+* Tilføjer `BREAK` og `WAITKEYPRESS` til `insname` metoden
 
 ```java
 final static int BREAK = 26, WAITKEYPRESS = 27;
@@ -296,7 +297,16 @@ static int execcode(int[] p, int[] s, int[] iargs, boolean trace) {
         try {System.in.read();} catch (Exception e) {};
       } break;
       ...
-    }
+  }
+
+  static String insname(int[] p, int pc) {
+    switch (p[pc]) {
+    case CSTI:   return "CSTI " + p[pc+1]; 
+    ...
+    case BREAK:  return "BREAK";
+    case WAITKEYPRESS: return "WAITKEYPRESS";
+    default:     return "<unknown>";
+  }
 ```
 
 Til sidst udvider jeg compileren i `Contcomp.fs` til at kunne håndtere breakpoints:
@@ -351,5 +361,5 @@ Press ENTER to continue
 1 [ 4 -999 1 0 ]{19: IFZERO 22}
 
 
-Ran 5.818 seconds
+Ran 3.206 seconds
 ```

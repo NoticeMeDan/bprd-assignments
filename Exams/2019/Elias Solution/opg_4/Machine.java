@@ -176,6 +176,8 @@ class Machine {
     case PRINTC: return "PRINTC";
     case LDARGS: return "LDARGS";
     case STOP:   return "STOP";
+    case BREAK:  return "BREAK";
+    case WAITKEYPRESS: return "WAITKEYPRESS";
     default:     return "<unknown>";
     }
   }
