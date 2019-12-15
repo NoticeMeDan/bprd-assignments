@@ -277,6 +277,30 @@ let rec emitints getlab instr ints =
     case WAITKEYPRESS: return "WAITKEYPRESS";
 ```
 
+```fsharp
+//test
+> java Machine bp.out 8                                                                                                                                         13:17:45 
+8 [ 4 -999 8 1 ]{19: IFZERO 22}
+please press key
+
+7 [ 4 -999 7 0 ]{19: IFZERO 22}
+6 [ 4 -999 6 1 ]{19: IFZERO 22}
+please press key
+
+5 [ 4 -999 5 0 ]{19: IFZERO 22}
+4 [ 4 -999 4 1 ]{19: IFZERO 22}
+please press key
+
+3 [ 4 -999 3 0 ]{19: IFZERO 22}
+2 [ 4 -999 2 1 ]{19: IFZERO 22}
+please press key
+
+1 [ 4 -999 1 0 ]{19: IFZERO 22}
+
+
+Ran 3.201 seconds
+```
+
 
 # 5 Arrays i micro–C
 
