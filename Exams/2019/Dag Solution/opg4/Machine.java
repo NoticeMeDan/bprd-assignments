@@ -73,7 +73,6 @@ class Machine {
         try {
           System.out.println("please press key");
           System.in.read();
-          break;
         } catch (Exception e) {
           System.out.println("you fucked up.");
         }
