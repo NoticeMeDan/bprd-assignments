@@ -35,7 +35,7 @@ class Machine {
     GOTO = 16, IFZERO = 17, IFNZRO = 18, CALL = 19, TCALL = 20, RET = 21, 
     PRINTI = 22, PRINTC = 23, 
     LDARGS = 24,
-    STOP = 25;
+    STOP = 25, BREAK = 26, WAITKEYPRESS = 27;
 
   final static int STACKSIZE = 1000;
   
@@ -110,7 +110,7 @@ class Machine {
         s[sp-argc+1] = bp;   sp++; 
         bp = sp+1-argc;
         pc = p[pc]; 
-      } break; 
+      } break;
       case TCALL: { 
         int argc = p[pc++];                // Number of new arguments
         int pop  = p[pc++];		   // Number of variables to discard
@@ -123,6 +123,12 @@ class Machine {
         sp = sp-p[pc]; bp = s[--sp]; pc = s[--sp]; 
         s[sp] = res; 
       } break; 
+      case BREAK:
+        printsppc(s, bp, sp, p, pc); break;
+      case WAITKEYPRESS: {
+        System.out.println("Press ENTER to continue");
+        try {System.in.read();} catch (Exception e) {};
+      } break;
       case PRINTI:
         System.out.print(s[sp] + " "); break; 
       case PRINTC:

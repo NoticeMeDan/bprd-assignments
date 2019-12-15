@@ -216,6 +216,9 @@ let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : instr 
       RET (snd varEnv - 1) :: deadcode C
     | Return (Some e) -> 
       cExpr e varEnv funEnv (RET (snd varEnv) :: deadcode C)
+    | Break e ->
+      let (labSkip, C1) = addLabel C
+      cExpr e varEnv funEnv (BREAK :: IFZERO labSkip :: WAITKEYPRESS :: C1)
 
 and bStmtordec stmtOrDec varEnv : bstmtordec * varEnv =
     match stmtOrDec with 
