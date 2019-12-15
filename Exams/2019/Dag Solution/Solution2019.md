@@ -18,9 +18,9 @@ let iconEx1 = Every(Write(Prim("<",CstI 7,FromTo(1,10))))
 //Old
 let iconEx2 = Every(Write(And(FromTo(1,4), And(Write (CstS "\n"),FromTo(1,4)))))
 > run iconEx2;;
-1234
-1234
-1234
+1 2 3 4
+1 2 3 4
+1 2 3 4
 1 2 3 4 val it : value = Int 0
 
 //new
@@ -130,7 +130,6 @@ AtExpr:
 Expr:
   ...
   | Expr DOT NAME     { Field($1, $3) }
-
 ```
 
 Examples
@@ -160,7 +159,8 @@ val ex5 : Absyn.expr =
 # 3 Evaluering af Records i micro–ML
 
 1) Tegn et evaluerings træ
-######giv et bud
+
+![EvaluationTree](opg3/opg3-1.png)
 
 2) Udvid funktionen eval i HigherFun.fs
 ```fsharp
@@ -192,10 +192,96 @@ val it : HigherFun.value = Int 32
 # 4 Breakpoints i micro–C  
 
 
+```fsharp
+//absyn
+and stmt =
+  |...
+  | Break of expr
+```
+```fsharp
+//CLex
+let keyword s =
+    match s with
+    | ...
+    | "break"   -> BREAK    
+```
+
+```fsharp
+//CPar.fsy
+%token BREAK
+
+StmtM:
+  | ...
+  | BREAK Expr SEMI         { Break($2) }
+```
+
+```fsharp
+//Contcomp.c
+let rec cStmt stmt (varEnv : varEnv) (funEnv : funEnv) (C : instr list) : instr list = 
+    match stmt with
+    | ...
+    | Break e ->
+      let (labSkip, C1) = addLabel C
+      cExpr e varEnv funEnv (BREAK :: IFZERO labSkip :: WAITKEYPRESS :: C1)
+```
+
+```fsharp
+//Machine.fs
+type instr =
+  | ...
+  | BREAK   
+  | WAITKEYPRESS
+
+let CODEBREAK  = 26
+let CODEWAITKEYPRESS = 27;
+
+let makelabenv (addr, labenv) instr = 
+    | ...
+    | BREAK          -> (addr+1, labenv)
+    | WAITKEYPRESS   -> (addr+1, labenv)
+
+let rec emitints getlab instr ints = 
+    match instr with
+    | ...
+    | BREAK          -> CODEBREAK  :: ints
+    | WAITKEYPRESS   -> CODEWAITKEYPRESS :: ints
+```
+
+```fsharp 
+//Machine.java
+  final static int 
+    ...
+    BREAK = 26, WAITKEYPRESS = 27;
+
+  static int execcode(int[] p, int[] s, int[] iargs, boolean trace) {
+    ...
+      switch (p[pc++]) {
+      case BREAK:
+        printsppc(s, bp, sp, p, pc);
+        break;
+      case WAITKEYPRESS:
+        try {
+          System.out.println("Please press ENTER");
+          System.in.read();
+        } catch (Exception e) {
+          System.out.println("Jesus loves you");
+        }
+        break;
+      case CSTI:
+        ...
+
+  static String insname(int[] p, int pc) {
+    switch (p[pc]) {
+    ...
+    case BREAK:  return "BREAK";
+    case WAITKEYPRESS: return "WAITKEYPRESS";
+```
+
+
 # 5 Arrays i micro–C
 
 
-1)
+1) Tegn og beskriv indholdet af stakken når programafviklingen når til det sted, hvor kommentaren er indsat i funktionen printArray. Du skal opdele stakken stack frames og angive base pointer og stack pointer.
 ```
 //The stackframe 
 [ 4 -999 42 42 42 42 42 2 5 | 125 2 2 0 ]
@@ -203,7 +289,7 @@ val it : HigherFun.value = Int 32
                                 bp^  
 ```
 
-2) Forklar, hvorfor vi, efter at have fjernet `print 43;`: 2 1 4 3 1.
+2) Forklar, hvorfor vi, efter at have fjernet `print 43;` giver `2 1 4 3 1`.
 ```
 Resultatet bliver ikke som forventet, da "optimeringerne" i Contcomp.fs gør at `printArray(a)` bliver lavet til et TCall (et tail call), som overskriver den gamle stackframe, hvilket resulterer i at 42'tallerne bliver overskrevet.
 ```
