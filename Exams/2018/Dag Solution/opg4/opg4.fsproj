@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+    <Content Include="../../../../../../../../../../Downloads/MicroC/obj/fsac.cache">
+      <Link>obj/fsac.cache</Link>
+    </Content>
+    <Content Include="a.out" />
+    <Compile Include="Absyn.fs" />
+    <Content Include="bar" />
+    <Compile Include="CLex.fs" />
+    <Content Include="CLex.fsl" />
+    <Compile Include="Comp.fs" />
+    <Content Include="CPar.exe" />
+    <Compile Include="Contcomp.fs" />
+    <Compile Include="CPar.fs" />
+    <Compile Include="CPar.fsi" />
+    <Content Include="CPar.fsy" />
+    <Content Include="ex1.out" />
+    <Content Include="ex2.out" />
+    <Content Include="ex3.out" />
+    <Content Include="ex4.out" />
+    <Content Include="ex5.out" />
+    <Content Include="ex6.out" />
+    <Content Include="ex8.out" />
+    <Content Include="ex9.out" />
+    <Content Include="ex10.out" />
+    <Content Include="ex11.out" />
+    <Content Include="ex12.out" />
+    <Content Include="ex12notailcall.out" />
+    <Content Include="ex12tailcall.out" />
+    <Content Include="ex13.out" />
+    <Content Include="ex19.out" />
+    <Content Include="ex21.out" />
+    <Content Include="ex22.out" />
+    <Content Include="ex23.out" />
+    <Content Include="ex25.code" />
+    <Content Include="ex25.out" />
+    <Content Include="ex26.out" />
+    <Compile Include="Machine.fs" />
+    <Content Include="FSharp.Core.dll" />
+    <Content Include="grammar.txt" />
+    <Compile Include="Interp.fs" />
+    <Content Include="machine" />
+    <Content Include="Machine.class" />
+    <Content Include="Machine.java" />
+    <Content Include="Machinetrace.class" />
+    <Content Include="microcc.exe" />
+    <Compile Include="MicroCC.fs" />
+    <Content Include="out" />
+    <Compile Include="Parse.fs" />
+    <Compile Include="ParseAndComp.fs" />
+    <Compile Include="ParseAndContcomp.fs" />
+    <Compile Include="ParseAndRun.fs" />
+    <Content Include="prog0" />
+    <Content Include="prog1" />
+    <Content Include="README.TXT" />
+    <Content Include="wrapUpEx01.exe" />
+    <Content Include="wrapUpEx01.out" />
+  </ItemGroup>
+</Project>

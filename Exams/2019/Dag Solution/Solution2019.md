@@ -279,7 +279,7 @@ let rec emitints getlab instr ints =
 
 ```fsharp
 //test
-> java Machine bp.out 8                                                                                                                                         13:17:45 
+> java Machine bp.out 8
 8 [ 4 -999 8 1 ]{19: IFZERO 22}
 please press key
 

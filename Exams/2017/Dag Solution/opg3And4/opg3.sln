@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "opg3", "opg3.fsproj", "{7ED7D8DD-9155-4BC2-8C81-8758D8BA27FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7ED7D8DD-9155-4BC2-8C81-8758D8BA27FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ED7D8DD-9155-4BC2-8C81-8758D8BA27FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ED7D8DD-9155-4BC2-8C81-8758D8BA27FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ED7D8DD-9155-4BC2-8C81-8758D8BA27FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

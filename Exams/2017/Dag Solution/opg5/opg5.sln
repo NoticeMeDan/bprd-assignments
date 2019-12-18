@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "opg5", "opg5.fsproj", "{FAA737E5-0796-49DF-818B-BCF3C733E078}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FAA737E5-0796-49DF-818B-BCF3C733E078}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA737E5-0796-49DF-818B-BCF3C733E078}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA737E5-0796-49DF-818B-BCF3C733E078}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA737E5-0796-49DF-818B-BCF3C733E078}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
